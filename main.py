@@ -1,16 +1,36 @@
-# This is a sample Python script.
+import cv2
+import numpy as np
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def my_roberts(slika):
+    #vaša implementacija
+    slika_robov=0
+    return slika_robov
 
+def my_prewitt(slika):
+    #vaša implementacija
+    slika_robov=0
+    return slika_robov
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def my_sobel(slika):
+    #vaša implementacija
+    slika_robov=0
+    return slika_robov
 
+def canny(slika, sp_prag, zg_prag):
+    #vaša implementacija
+    slika_robov=0
+    return slika_robov
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def spremeni_kontrast(slika, alfa, beta):
+    pass
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+img = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Temp.jpg', cv2.IMREAD_GRAYSCALE)
+my_roberts(img)
+cv2.namedWindow("Slika")
+
+while True:
+    cv2.imshow("Slika", img)
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
