@@ -1,7 +1,12 @@
 import cv2
 import numpy as np
 
-
+def selected_edges(slika, edge):
+    slika_robov = np.zeros((slika.shape[0], slika.shape[1], 3), np.uint8)
+    slika = cv2.cvtColor(slika, cv2.COLOR_GRAY2BGR)
+    slika_robov[:, :, 0] = edge  # Change the blue channel instead of the red channel
+    slika_robov = cv2.addWeighted(slika, 0.4, slika_robov, 1.4, 3)
+    cv2.imshow("Selected edges", slika_robov)
 def my_roberts(slika):
     roberts_kernel_x = np.array([[1, 0], [0, -1]])
     roberts_kernel_y = np.array([[0, 1], [-1, 0]])
@@ -16,6 +21,7 @@ def my_roberts(slika):
 
     slika_robov = ((output_img - output_img.min()) / (output_img.max() - output_img.min())) * 255
     slika_robov = cv2.convertScaleAbs(slika_robov)
+    selected_edges(slika, slika_robov)
     return slika_robov
 
 
@@ -32,6 +38,7 @@ def my_prewitt(slika):
             izhodna_slika[i, j] = magnituda
     slika_robov = ((izhodna_slika - izhodna_slika.min()) / (izhodna_slika.max() - izhodna_slika.min())) * 255
     slika_robov = cv2.convertScaleAbs(slika_robov)
+    selected_edges(slika, slika_robov)
     return slika_robov
 
 
@@ -49,11 +56,13 @@ def my_sobel(slika):
 
     slika_robov = ((output_img - output_img.min()) / (output_img.max() - output_img.min())) * 255
     slika_robov = cv2.convertScaleAbs(slika_robov)
+    selected_edges(slika, slika_robov)
     return slika_robov
 
 
 def canny(slika, sp_prag, zg_prag):
     slika_robov = cv2.Canny(slika, sp_prag, zg_prag)
+    selected_edges(slika, slika_robov)
     return slika_robov
 
 
