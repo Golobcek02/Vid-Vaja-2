@@ -66,10 +66,15 @@ def spremeni_kontrast(slika, alfa, beta):
 
 
 slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', 0)
-slika = spremeni_kontrast(slika, 1, 150)
+slika = spremeni_kontrast(slika, 1, 120)
+
+prewit = my_prewitt(slika)
+cannyImage = canny(slika, 100, 200)
 
 while True:
     cv2.imshow("Kontrast", slika)
+    cv2.imshow("Prewitt", prewit)
+    cv2.imshow("Canny", cannyImage)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
