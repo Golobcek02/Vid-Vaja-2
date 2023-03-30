@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-def my_roberts(slika):
 
+def my_roberts(slika):
     roberts_kernel_x = np.array([[1, 0], [0, -1]])
     roberts_kernel_y = np.array([[0, 1], [-1, 0]])
 
@@ -18,6 +18,7 @@ def my_roberts(slika):
     slika_robov = cv2.convertScaleAbs(slika_robov)
     return slika_robov
 
+
 def my_prewitt(slika):
     prewitt_kernel_x = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
     prewitt_kernel_y = np.array([[-1, -1, -1], [0, 0, 0], [1, 1, 1]])
@@ -30,20 +31,25 @@ def my_prewitt(slika):
             magnituda = np.hypot(gradient_x, gradient_y)
             izhodna_slika[i, j] = magnituda
     slika_robov = ((izhodna_slika - izhodna_slika.min()) / (izhodna_slika.max() - izhodna_slika.min())) * 255
+    slika_robov = cv2.convertScaleAbs(slika_robov)
     return slika_robov
+
 
 def my_sobel(slika):
-    #vaša implementacija
-    slika_robov=0
+    # vaša implementacija
+    slika_robov = 0
     return slika_robov
 
+
 def canny(slika, sp_prag, zg_prag):
-    #vaša implementacija
-    slika_robov=0
+    # vaša implementacija
+    slika_robov = 0
     return slika_robov
+
 
 def spremeni_kontrast(slika, alfa, beta):
     pass
+
 
 slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Temp.jpg', cv2.IMREAD_GRAYSCALE)
 slika = my_prewitt(slika)
