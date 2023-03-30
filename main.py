@@ -65,9 +65,12 @@ def spremeni_kontrast(slika, alfa, beta):
 slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', cv2.IMREAD_GRAYSCALE)
 slika = my_sobel(slika)
 cv2.namedWindow("Slika")
+slika2 = my_sobel(slika)
+cv2.namedWindow("Slika2")
 
 while True:
     cv2.imshow("Slika", slika)
+    cv2.imshow("Slika2", slika2)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
