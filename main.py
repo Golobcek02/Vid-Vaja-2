@@ -1,12 +1,15 @@
 import cv2
 import numpy as np
 
+
 def selected_edges(slika, edge):
     slika_robov = np.zeros((slika.shape[0], slika.shape[1], 3), np.uint8)
     slika = cv2.cvtColor(slika, cv2.COLOR_GRAY2BGR)
     slika_robov[:, :, 0] = edge  # Change the blue channel instead of the red channel
     slika_robov = cv2.addWeighted(slika, 0.4, slika_robov, 1.4, 3)
     cv2.imshow("Selected edges", slika_robov)
+
+
 def my_roberts(slika):
     roberts_kernel_x = np.array([[1, 0], [0, -1]])
     roberts_kernel_y = np.array([[0, 1], [-1, 0]])
@@ -77,13 +80,20 @@ def spremeni_kontrast(slika, alfa, beta):
 slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', 0)
 slika = spremeni_kontrast(slika, 1, 180)
 
-prewit = my_prewitt(slika)
-cannyImage = canny(slika, 100, 200)
+funkcija = 1
 
 while True:
+    if funkcija == 1:
+        cv2.imshow("Roberts", my_roberts(slika))
+    elif funkcija == 2:
+        cv2.imshow("Prewitt", my_prewitt(slika))
+    elif funkcija == 3:
+        cv2.imshow("Sobel", my_sobel(slika))
+    elif funkcija == 4:
+        cv2.imshow("Canny", canny(slika))
+    else:
+        break
     cv2.imshow("Kontrast", slika)
-    cv2.imshow("Prewitt", prewit)
-    cv2.imshow("Canny", cannyImage)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
