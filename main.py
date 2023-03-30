@@ -53,7 +53,8 @@ def my_sobel(slika):
 
 
 def canny(slika, sp_prag, zg_prag):
-    slika_robov = cv2.Canny(slika, sp_prag, zg_prag)
+    # vaša implementacija
+    slika_robov = 0
     return slika_robov
 
 
