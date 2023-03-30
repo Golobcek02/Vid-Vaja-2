@@ -36,8 +36,19 @@ def my_prewitt(slika):
 
 
 def my_sobel(slika):
-    # vaša implementacija
-    slika_robov = 0
+    sobel_kernel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+    sobel_kernel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]])
+
+    output_img = np.zeros_like(slika, dtype=np.float32)
+    for i in range(1, slika.shape[0] - 1):
+        for j in range(1, slika.shape[1] - 1):
+            gradient_x = np.sum(slika[i - 1:i + 2, j - 1:j + 2] * sobel_kernel_x)
+            gradient_y = np.sum(slika[i - 1:i + 2, j - 1:j + 2] * sobel_kernel_y)
+            magnitude = np.hypot(gradient_x, gradient_y)
+            output_img[i, j] = magnitude
+
+    slika_robov = ((output_img - output_img.min()) / (output_img.max() - output_img.min())) * 255
+    slika_robov = cv2.convertScaleAbs(slika_robov)
     return slika_robov
 
 
@@ -51,8 +62,8 @@ def spremeni_kontrast(slika, alfa, beta):
     pass
 
 
-slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Temp.jpg', cv2.IMREAD_GRAYSCALE)
-slika = my_prewitt(slika)
+slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', cv2.IMREAD_GRAYSCALE)
+slika = my_sobel(slika)
 cv2.namedWindow("Slika")
 
 while True:
