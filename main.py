@@ -19,8 +19,17 @@ def my_roberts(slika):
     return slika_robov
 
 def my_prewitt(slika):
-    #vaša implementacija
-    slika_robov=0
+    prewitt_kernel_x = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
+    prewitt_kernel_y = np.array([[-1, -1, -1], [0, 0, 0], [1, 1, 1]])
+
+    izhodna_slika = np.zeros_like(slika, dtype=np.float32)
+    for i in range(1, slika.shape[0] - 1):
+        for j in range(1, slika.shape[1] - 1):
+            gradient_x = np.sum(slika[i - 1:i + 2, j - 1:j + 2] * prewitt_kernel_x)
+            gradient_y = np.sum(slika[i - 1:i + 2, j - 1:j + 2] * prewitt_kernel_y)
+            magnituda = np.hypot(gradient_x, gradient_y)
+            izhodna_slika[i, j] = magnituda
+    slika_robov = ((izhodna_slika - izhodna_slika.min()) / (izhodna_slika.max() - izhodna_slika.min())) * 255
     return slika_robov
 
 def my_sobel(slika):
@@ -37,7 +46,7 @@ def spremeni_kontrast(slika, alfa, beta):
     pass
 
 slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Temp.jpg', cv2.IMREAD_GRAYSCALE)
-slika = my_roberts(slika)
+slika = my_prewitt(slika)
 cv2.namedWindow("Slika")
 
 while True:
