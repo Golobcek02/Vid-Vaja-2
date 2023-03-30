@@ -58,18 +58,18 @@ def canny(slika, sp_prag, zg_prag):
 
 
 def spremeni_kontrast(slika, alfa, beta):
-    pass
+    slika = slika.astype(np.float32)
+    slika_kontrast = alfa * slika + beta
+    slika_kontrast = np.clip(slika_kontrast, 0, 255)
+    slika_kontrast = slika_kontrast.astype(np.uint8)
+    return slika_kontrast
 
 
-slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', cv2.IMREAD_GRAYSCALE)
-slika = my_sobel(slika)
-cv2.namedWindow("Slika")
-slika2 = my_sobel(slika)
-cv2.namedWindow("Slika2")
+slika = cv2.imread(r'D:\FERI\4_FERI_NALOGE\Vid\Vaja_2_Git\Lena.png', 0)
+slika = spremeni_kontrast(slika, 1, 150)
 
 while True:
-    cv2.imshow("Slika", slika)
-    cv2.imshow("Slika2", slika2)
+    cv2.imshow("Kontrast", slika)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
